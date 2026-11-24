@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VZEKO – ПАРИ ВЕДНАГА. Директно изкупуване на техника, инструменти и ценни вещи в София и цяла България. Бърза оценка, конкретна оферта и директно плащане.">
+  <meta name="theme-color" content="#060606">
+  <title>VZEKO – ПАРИ ВЕДНАГА. | Директно изкупуване на вещи</title>
+  <!-- SVG Favicon със златно V -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060606'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23F3D98B'/%3E%3Cstop offset='50%25' stop-color='%23D4AF37'/%3E%3Cstop offset='100%25' stop-color='%239E7B2F'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M12 16h12l9 22 11-22h10L36 50H25L12 16z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <!-- Google Fonts с поддръжка на кирилица -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060606;
+      --bg-elevated: #0b0b0b;
+      --panel: #111111;
+      --panel-2: #161616;
+      --gold: #D4AF37;
+      --gold-light: #F3D98B;
+      --gold-dark: #9E7B2F;
+      --gold-gradient: linear-gradient(135deg, #F3D98B 0%, #D4AF37 50%, #9E7B2F 100%);
+      --gold-gradient-text: linear-gradient(120deg, #FFF1BF 0%, #E7C66B 35%, #D4AF37 70%, #A98332 100%);
+      --white: #F7F5F0;
+      --muted: #A6A29A;
+      --muted-dark: #75716A;
+      --line: rgba(212, 175, 55, 0.22);
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --shadow-gold: 0 12px 34px rgba(212, 175, 55, 0.16);
+      --radius: 14px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* Тънка златна линия най-отгоре */
+    .topline {
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-dark) 20%, var(--gold-light) 50%, var(--gold-dark) 80%, transparent 100%);
+    }
+
+    /* Навигация */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(6, 6, 6, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+
+    .brand-link:hover {
+      transform: scale(1.02);
+    }
+
+    .navlinks {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #D8D4CC;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .navlinks a {
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.2s ease;
+    }
+
+    .navlinks a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold-gradient);
+      transition: width 0.25s ease;
+    }
+
+    .navlinks a:hover {
+      color: var(--gold-light);
+    }
+
+    .navlinks a:hover::after {
+      width: 100%;
+    }
+
+    /* Бутони */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      background: var(--gold-gradient);
+      color: #060606;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: var(--shadow-gold);
+      transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(212, 175, 55, 0.28);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--white);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+    }
+
+    .nav-cta {
+      padding: 11px 19px;
+      font-size: 12px;
+    }
+
+    .menu-btn {
+      display: none;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--gold-light);
+      border-radius: 10px;
+      padding: 10px 13px;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    /* HERO СЕКЦИЯ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 0 86px;
+      background:
+        radial-gradient(circle at 82% 38%, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.03) 34%, transparent 62%),
+        radial-gradient(circle at 12% 85%, rgba(158, 123, 47, 0.09) 0%, transparent 45%),
+        linear-gradient(180deg, #090909 0%, #060606 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold-light);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1.5px;
+      background: var(--gold-gradient);
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(38px, 5.4vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 900;
+      margin: 0 0 22px;
+      color: var(--white);
+    }
+
+    .gold-text {
+      background: var(--gold-gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-lead {
+      font-size: 17.5px;
+      color: #C5C1B8;
+      max-width: 600px;
+      margin: 0 0 32px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .trust-line {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      font-size: 13px;
+      color: #B4B0A8;
+    }
+
+    .trust-line span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .trust-line b {
+      color: var(--gold-light);
+      font-weight: 800;
+    }
+
+    /* Луксозна бранд-карта вдясно на Hero */
+    .hero-emblem-card {
+      position: relative;
+      background: linear-gradient(155deg, #13120F 0%, #0A0A0A 55%, #12100C 100%);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(243, 217, 139, 0.22);
+      overflow: hidden;
+    }
+
+    .hero-emblem-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.14) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .emblem-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(212, 175, 55, 0.08);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-logo-box {
+      position: relative;
+      z-index: 1;
+      margin: 6px auto 24px;
+      max-width: 340px;
+    }
+
+    .emblem-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+      margin: 22px 0;
+    }
+
+    .emblem-metrics {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .metric-pill {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .metric-pill strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+
+    .metric-pill span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ЛЕНТА С АКЦЕНТИ */
+    .ticker {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, #0A0A0A 0%, #11100D 50%, #0A0A0A 100%);
+    }
+
+    .ticker-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 20px 0;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #DDD5C4;
+    }
+
+    .ticker-item b {
+      font-size: 16px;
+      font-weight: 900;
+      background: var(--gold-gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ОБЩИ СТИЛОВЕ ЗА СЕКЦИИ */
+    section {
+      padding: 92px 0;
+    }
+
+    .section-head {
+      max-width: 680px;
+      margin-bottom: 46px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 22px;
+      height: 1.5px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 900;
+      margin: 12px 0 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0;
+    }
+
+    /* КАКВО ИЗКУПУВАМЕ (6 КАРТИ) */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      position: relative;
+      background: linear-gradient(155deg, #151515 0%, #0E0E0E 100%);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      padding: 30px 26px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .category::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      right: -38px;
+      bottom: -38px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.45);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+    }
+
+    .category:hover::after {
+      transform: scale(1.15);
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    .cat-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+    }
+
+    .category h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 8px;
+      color: var(--white);
+    }
+
+    .category p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* КАК РАБОТИ (4 СТЪПКИ) */
+    .how {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      position: relative;
+      background: linear-gradient(160deg, #141414 0%, #0D0D0D 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-light);
+    }
+
+    .step-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      padding: 5px 11px;
+      border-radius: 6px;
+    }
+
+    .step-watermark {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: rgba(212, 175, 55, 0.14);
+      line-height: 1;
+    }
+
+    .step h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 10px;
+      line-height: 1.3;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 13.5px;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ЗАЩО VZEKO */
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .split-desc {
+      color: #C2BEB5;
+      font-size: 16px;
+      margin: 0 0 26px;
+    }
+
+    .benefits {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 15px;
+    }
+
+    .benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      color: #E3DFD7;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .check-badge {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold-light);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    .statement-card {
+      position: relative;
+      padding: 44px 38px;
+      background: linear-gradient(145deg, #171510 0%, #0C0C0C 60%, #14120D 100%);
+      border: 1px solid rgba(212, 175, 55, 0.38);
+      border-radius: 18px;
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(243, 217, 139, 0.25);
+    }
+
+    .statement-quote-mark {
+      font-family: Georgia, serif;
+      font-size: 76px;
+      line-height: 0.8;
+      color: var(--gold);
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    .statement-card p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 23px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0 0 24px;
+    }
+
+    .statement-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(212, 175, 55, 0.22);
+    }
+
+    .statement-footer span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    /* FAQ АКОРДЕОН */
+    .faq {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .faq-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    details {
+      background: var(--panel);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    details[open] {
+      border-color: rgba(212, 175, 55, 0.42);
+      background: #141310;
+    }
+
+    summary {
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 18px;
+      font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    details[open] summary::after {
+      content: "−";
+      background: rgba(212, 175, 55, 0.14);
+    }
+
+    details p {
+      color: #B6B2A9;
+      font-size: 14px;
+      margin: 14px 0 0;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      line-height: 1.6;
+    }
+
+    /* СЕКЦИЯ ЗА ЗАПИТВАНЕ И КОНТАКТ */
+    .offer-section {
+      position: relative;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.14) 0%, transparent 62%),
+        var(--bg);
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .form-card {
+      background: linear-gradient(160deg, #141414 0%, #0D0D0D 100%);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      border-radius: 18px;
+      padding: 36px 32px;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.65);
+    }
+
+    .form-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 8px;
+    }
+
+    .form-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #DCD7CD;
+      margin-bottom: 7px;
+      letter-spacing: 0.02em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: #090909;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 13px 15px;
+      color: var(--white);
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: #6B6760;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .field textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .photo-hint {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px dashed rgba(212, 175, 55, 0.38);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #E5DEC9;
+      margin-bottom: 20px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .form-actions .btn {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    /* Кутия с готов текст за копиране */
+    .preview-box {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      background: #090909;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 12px;
+    }
+
+    .preview-box.visible {
+      display: block;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .preview-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: inherit;
+      font-size: 13px;
+      color: #D2CEC5;
+      line-height: 1.55;
+      background: #111111;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .mini-btn {
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold-light);
+      border-radius: 8px;
+      padding: 7px 13px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .mini-btn:hover {
+      background: rgba(212, 175, 55, 0.24);
+    }
+
+    /* Дясна колона - Директен контакт */
+    .contact-card {
+      background: linear-gradient(155deg, #151410 0%, #0C0C0C 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 34px 30px;
+    }
+
+    .contact-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 21px;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+
+    .contact-card > p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 24px;
+    }
+
+    .email-box {
+      background: #080808;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .email-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .email-address {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(18px, 2.2vw, 22px);
+      font-weight: 800;
+      color: var(--white);
+      word-break: break-all;
+      margin-bottom: 16px;
+      transition: color 0.2s ease;
+    }
+
+    .email-address:hover {
+      color: var(--gold-light);
+    }
+
+    .email-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .email-btns .btn {
+      padding: 11px 16px;
+      font-size: 12px;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 13.5px;
+      color: #C7C3BA;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .info-dot {
+      color: var(--gold-light);
+      font-weight: 900;
+    }
+
+    .social-soon {
+      margin-top: 20px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line);
+      background: #050505;
+      padding: 36px 0 40px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .footer-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    .footer-mail {
+      font-size: 13.5px;
+      color: #C7C3BA;
+      transition: color 0.2s ease;
+    }
+
+    .footer-mail:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted-dark);
+    }
+
+    /* Известие (Toast) без alert() */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      background: #14130F;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* АДАПТИВНОСТ (TABLET & MOBILE) */
+    @media (max-width: 980px) {
+      .hero-grid,
+      .split,
+      .offer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .hero-emblem-card {
+        max-width: 480px;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .navlinks {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 82px;
+        background: rgba(8, 8, 8, 0.98);
+        padding: 22px 24px 28px;
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .navlinks.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .categories,
+      .faq-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ticker-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .wrap {
+        width: min(var(--max), calc(100% - 30px));
+      }
+
+      section {
+        padding: 68px 0;
+      }
+
+      .hero {
+        padding: 54px 0 64px;
+      }
+
+      .categories,
+      .steps,
+      .faq-list,
+      .form-row,
+      .emblem-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .ticker-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .hero-actions .btn,
+      .form-actions .btn,
+      .email-btns .btn {
+        width: 100%;
+      }
+
+      .form-card,
+      .contact-card,
+      .statement-card {
+        padding: 26px 20px;
+      }
+
+      .statement-card p {
+        font-size: 19px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+
+  <!-- ХЕДЪР -->
+  <header>
+    <div class="wrap nav">
+      <a class="brand-link" href="#home" aria-label="VZEKO – Пари веднага">
+        <!-- Вградено SVG лого VZEKO в стила на оригиналния бранд -->
+        <svg width="168" height="50" viewBox="0 0 340 102" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VZEKO Пари веднага">
+          <defs>
+            <linearGradient id="navGold" x1="15" y1="15" x2="320" y2="85" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFF0BD"/>
+              <stop offset="30%" stop-color="#E5C365"/>
+              <stop offset="68%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#9A762B"/>
+            </linearGradient>
+            <linearGradient id="navSwoosh" x1="45" y1="38" x2="310" y2="16" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#C89F3C"/>
+              <stop offset="50%" stop-color="#FFF3C4"/>
+              <stop offset="100%" stop-color="#D4AF37"/>
+            </linearGradient>
+          </defs>
+          <!-- Динамична дъговидна стрелка от V към O -->
+          <path d="M54 55C108 14 218 6 286 19L283 8L318 24L276 34L282 25C216 14 112 22 54 55Z" fill="url(#navSwoosh)"/>
+          <!-- Стилизирано V + ZEKO -->
+          <path d="M22 28H46L58 56L76 28H96L64 72H45L22 28Z" fill="url(#navGold)"/>
+          <text x="95" y="71" fill="url(#navGold)" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-style="italic" font-size="53" letter-spacing="3">ZEKO</text>
+          <!-- Златни линии и слоган ПАРИ ВЕДНАГА. -->
+          <line x1="26" y1="88" x2="78" y2="88" stroke="url(#navGold)" stroke-width="2" stroke-linecap="round"/>
+          <text x="172" y="92" text-anchor="middle" fill="#E8CA74" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="12.5" letter-spacing="4.2">ПАРИ ВЕДНАГА.</text>
+          <line x1="266" y1="88" x2="314" y2="88" stroke="url(#navGold)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </a>
+
+      <nav class="navlinks" id="navlinks" aria-label="Основна навигация">
+        <a href="#what">Какво изкупуваме</a>
+        <a href="#how">Как работи</a>
+        <a href="#why">Защо VZEKO</a>
+        <a href="#faq">Въпроси</a>
+      </nav>
+
+      <a class="btn nav-cta" href="#offer">ИЗПРАТИ ЗА ОФЕРТА <span>↗</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Отвори меню" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="home">
+    <!-- HERO СЕКЦИЯ -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Директно изкупуване · София и цяла България</div>
+          <h1>Имаш вещ.<br>Трябват ти <span class="gold-text">пари ВЕДНАГА.</span></h1>
+          <p class="hero-lead">
+            Без обяви, без безкрайни разговори, без пазарене с непознати и без чакане на купувач. Понякога парите ти трябват СЕГА — не след седмица.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#offer">ПОЛУЧИ ОФЕРТА ПО ИМЕЙЛ <span>↗</span></a>
+            <a class="btn secondary" href="#how">КАК РАБОТИ</a>
+          </div>
+          <div class="trust-line">
+            <span><b>✓</b> Бърза оценка</span>
+            <span><b>✓</b> Директно плащане</span>
+            <span><b>✓</b> Лично в София или с Еконт и Спиди в цялата страна</span>
+          </div>
+        </div>
+
+        <!-- Премиум емблема карта вдясно -->
+        <aside class="hero-emblem-card" aria-label="VZEKO бранд визитка">
+          <div class="emblem-badge">Директно изкупуване</div>
+          <div class="hero-logo-box">
+            <svg width="100%" viewBox="0 0 380 124" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VZEKO – ПАРИ ВЕДНАГА.">
+              <defs>
+                <linearGradient id="heroGold" x1="18" y1="20" x2="360" y2="95" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#FFF2C2"/>
+                  <stop offset="28%" stop-color="#E7C66B"/>
+                  <stop offset="65%" stop-color="#D4AF37"/>
+                  <stop offset="100%" stop-color="#9A762B"/>
+                </linearGradient>
+                <linearGradient id="heroSwoosh" x1="55" y1="52" x2="350" y2="18" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#B88E2F"/>
+                  <stop offset="52%" stop-color="#FFF4C8"/>
+                  <stop offset="100%" stop-color="#D4AF37"/>
+                </linearGradient>
+              </defs>
+              <path d="M62 66C124 18 248 8 324 23L320 10L360 28L312 40L319 30C244 17 128 27 62 66Z" fill="url(#heroSwoosh)"/>
+              <path d="M24 34H51L65 66L86 34H108L72 85H50L24 34Z" fill="url(#heroGold)"/>
+              <text x="107" y="84" fill="url(#heroGold)" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-style="italic" font-size="60" letter-spacing="3.5">ZEKO</text>
+              <line x1="24" y1="106" x2="86" y2="106" stroke="url(#heroGold)" stroke-width="2.2" stroke-linecap="round"/>
+              <text x="192" y="111" text-anchor="middle" fill="#EBD07C" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="14" letter-spacing="4.8">ПАРИ ВЕДНАГА.</text>
+              <line x1="298" y1="106" x2="356" y2="106" stroke="url(#heroGold)" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="emblem-divider"></div>
+          <div class="emblem-metrics">
+            <div class="metric-pill">
+              <strong>София</strong>
+              <span>Лично предаване на място</span>
+            </div>
+            <div class="metric-pill">
+              <strong>Цяла България</strong>
+              <span>С Еконт и Спиди</span>
+            </div>
+            <div class="metric-pill">
+              <strong>0% ангажимент</strong>
+              <span>Ти решаваш дали приемаш</span>
+            </div>
+            <div class="metric-pill">
+              <strong>Директен контакт</strong>
+              <span>vzekoinfo@gmail.com</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ЛЕНТА С АКЦЕНТИ -->
+    <div class="ticker">
+      <div class="wrap ticker-inner">
+        <div class="ticker-item"><b>01</b> БЪРЗА ОЦЕНКА</div>
+        <div class="ticker-item"><b>02</b> КОНКРЕТНА ОФЕРТА</div>
+        <div class="ticker-item"><b>03</b> ДИРЕКТНО ПЛАЩАНЕ</div>
+        <div class="ticker-item"><b>04</b> БЕЗ ЗАДЪЛЖЕНИЕ</div>
+      </div>
+    </div>
+
+    <!-- КАКВО ИЗКУПУВАМЕ -->
+    <section id="what">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Какво изкупуваме</div>
+          <h2>Всяка вещ има стойност. <span class="gold-text">Превърни я в пари.</span></h2>
+          <p>Изкупуваме употребявани и нови вещи с реална пазарна стойност. Изпрати ни снимки и модел — разглеждаме всяко предложение индивидуално.</p>
+        </div>
+
+        <div class="categories">
+          <article class="category">
+            <div class="cat-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <h3>Телефони и таблети</h3>
+            <p>Смартфони, таблети и модерни мобилни устройства.</p>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg>
+            </div>
+            <h3>Лаптопи и компютри</h3>
+            <p>Лаптопи, настолни конфигурации, монитори и компоненти.</p>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r="1"/><circle cx="17.5" cy="13" r="1"/></svg>
+            </div>
+            <h3>Конзоли и гейминг техника</h3>
+            <p>PlayStation, Xbox, Nintendo, контролери и гейминг периферия.</p>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3>Електроинструменти</h3>
+            <p>Професионални и хоби машини и инструменти.</p>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+            </div>
+            <h3>Електроника и домакински уреди</h3>
+            <p>Телевизори, аудио системи, техника и уреди за дома.</p>
+          </article>
+
+          <article class="category">
+            <div class="cat-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6"/><polyline points="12 9 12 12 14 13"/><path d="M9 2h6M9 22h6"/></svg>
+            </div>
+            <h3>Часовници и други ценни вещи</h3>
+            <p>Маркови часовници, стойностни предмети и техника с пазарна стойност.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- КАК РАБОТИ -->
+    <section class="how" id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Лесно. Ясно. Бързо.</div>
+          <h2>Четири стъпки до <span class="gold-text">парите ти.</span></h2>
+          <p>Изпрати снимка. Получи оферта. Вземи парите — без да публикуваш обяви и без излишни разговори.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div>
+              <div class="step-top">
+                <span class="num">СТЪПКА 01</span>
+                <span class="step-watermark">01</span>
+              </div>
+              <h3>Изпращаш ни снимки и информация</h3>
+              <p>Модел, състояние, комплектовка и снимки на имейл <strong style="color:#E7C66B">vzekoinfo@gmail.com</strong>.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <div class="step-top">
+                <span class="num">СТЪПКА 02</span>
+                <span class="step-watermark">02</span>
+              </div>
+              <h3>Получаваш индивидуална оферта</h3>
+              <p>Оценяваме вещта бързо и ти връщаме конкретна цена без ангажимент.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <div class="step-top">
+                <span class="num">СТЪПКА 03</span>
+                <span class="step-watermark">03</span>
+              </div>
+              <h3>Уговаряме предаването</h3>
+              <p>Лично в София или чрез куриер с Еконт и Спиди в цяла България.</p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div>
+              <div class="step-top">
+                <span class="num">СТЪПКА 04</span>
+                <span class="step-watermark">04</span>
+              </div>
+              <h3>Приемаме вещта и получаваш парите си</h3>
+              <p>След преглед на място или с опция преглед и тест получаваш сумата веднага.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЗАЩО VZEKO -->
+    <section id="why">
+      <div class="wrap split">
+        <div>
+          <div class="kicker">Защо VZEKO?</div>
+          <h2>Не чакай купувач.<br><span class="gold-text">Продай сега.</span></h2>
+          <p class="split-desc">
+            Всяка вещ има стойност. Превърни я в пари. Освободи място, напълни портфейла и продължи напред — без обяви, без чакане и без пазарене.
+          </p>
+          <ul class="benefits">
+            <li><span class="check-badge">✓</span> Бърза оценка и конкретна оферта</li>
+            <li><span class="check-badge">✓</span> Директно изкупуване без посредници и обяви</li>
+            <li><span class="check-badge">✓</span> Лично обслужване в София</li>
+            <li><span class="check-badge">✓</span> Работа с клиенти от цяла България чрез Еконт и Спиди</li>
+            <li><span class="check-badge">✓</span> Без никакво задължение да приемеш предложената цена</li>
+          </ul>
+        </div>
+
+        <div class="statement-card">
+          <div class="statement-quote-mark" aria-hidden="true">“</div>
+          <p>
+            Понякога парите ти трябват СЕГА. Не след седмица, когато евентуално намериш купувач.
+          </p>
+          <div class="statement-footer">
+            <span>VZEKO – Отговорът, когато парите ти трябват веднага.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЧЕСТО ЗАДАВАНИ ВЪПРОСИ -->
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Често задавани въпроси</div>
+          <h2>Всичко важно <span class="gold-text">накратко.</span></h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>Купувате ли вещи втора употреба?</summary>
+            <p>Да! Изкупуваме употребявани вещи в различно състояние, стига да имат реална пазарна стойност и да отговарят на нашите критерии.</p>
+          </details>
+
+          <details>
+            <summary>Трябва ли вещта да има оригинална кутия?</summary>
+            <p>Не. Кутията, документите и аксесоарите могат да повлияят на оценката, но не са задължително условие за всяка покупка.</p>
+          </details>
+
+          <details>
+            <summary>Как определяте цената?</summary>
+            <p>Всяка вещ се оценява индивидуално според модела, състоянието, комплектовката, търсенето и актуалните пазарни цени.</p>
+          </details>
+
+          <details>
+            <summary>Задължен ли съм да приема офертата?</summary>
+            <p>Не! Получаваш предложение и сам решаваш дали да го приемеш.</p>
+          </details>
+
+          <details>
+            <summary>Работите ли извън София?</summary>
+            <p>Да! Приемаме запитвания от цяла България и организираме изпращането чрез куриер с Еконт и Спиди.</p>
+          </details>
+
+          <details>
+            <summary>Колко време отнема оценката?</summary>
+            <p>Стремим се да отговаряме възможно най-бързо, след като получим необходимата информация и снимки.</p>
+          </details>
+
+          <details>
+            <summary>Изкупувате ли повредени вещи?</summary>
+            <p>Разглеждаме и такива предложения, но всичко зависи от вида на повредата. Опиши дефекта и изпрати снимки, за да преценим.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНА СЕКЦИЯ ЗА ЗАПИТВАНЕ И КОНТАКТ -->
+    <section class="offer-section" id="offer">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Запитване за оферта</div>
+          <h2>Имаш нещо за продаване? <span class="gold-text">Ние имаме оферта.</span></h2>
+          <p>Попълни данните за вещта по-долу и изпрати запитването директно на нашия официален имейл. Не забравяй да прикачиш няколко снимки.</p>
+        </div>
+
+        <div class="offer-grid">
+          <!-- Бърз генератор на запитване -->
+          <div class="form-card">
+            <h3>Бърз генератор на запитване</h3>
+            <p class="form-sub">Подреди информацията за 30 секунди и изпрати директно по имейл.</p>
+
+            <form id="offerForm" novalidate>
+              <div class="form-row">
+                <div class="field" style="margin-bottom:0">
+                  <label for="category">Категория вещ</label>
+                  <select id="category" name="category">
+                    <option value="Телефон / Таблет">Телефон / Таблет</option>
+                    <option value="Лаптоп / Компютър">Лаптоп / Компютър</option>
+                    <option value="Конзола / Гейминг">Конзола / Гейминг</option>
+                    <option value="Електроинструмент">Електроинструмент</option>
+                    <option value="Електроника / Домакински уред">Електроника / Домакински уред</option>
+                    <option value="Часовник / Друга ценна вещ">Часовник / Друга ценна вещ</option>
+                  </select>
+                </div>
+
+                <div class="field" style="margin-bottom:0">
+                  <label for="city">Населено място</label>
+                  <input type="text" id="city" name="city" placeholder="Напр. София, Пловдив, Варна...">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="itemModel">Марка и точен модел *</label>
+                <input type="text" id="itemModel" name="itemModel" placeholder="Напр. iPhone 15 Pro 256GB / PlayStation 5 / Bosch GSR..." required>
+              </div>
+
+              <div class="field">
+                <label for="condition">Състояние и комплектовка *</label>
+                <textarea id="condition" name="condition" placeholder="Опиши състоянието (работи ли без забележки, следи от употреба) и какво включва (кутия, зарядно, документи, аксесоари)..." required></textarea>
+              </div>
+
+              <div class="field">
+                <label for="targetPrice">Ориентировъчна търсена цена в € (по желание)</label>
+                <input type="text" id="targetPrice" name="targetPrice" placeholder="Напр. 350 € (може да оставиш празно за наша оценка)">
+              </div>
+
+              <div class="photo-hint">
+                <span style="font-size:16px">📸</span>
+                <span><strong>Важно:</strong> След като натиснеш бутона, прикачи 2–4 ясни снимки на вещта в имейла, за да получиш максимално точна и бърза оферта.</span>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn">ИЗПРАТИ ЗАПИТВАНЕ ПО ИМЕЙЛ <span>↗</span></button>
+                <button type="button" class="btn secondary" id="generateTextBtn">ПОДГОТВИ ТЕКСТ ЗА КОПИРАНЕ</button>
+              </div>
+            </form>
+
+            <!-- Готов текст за уеб поща (Gmail в браузър) -->
+            <div class="preview-box" id="previewBox">
+              <div class="preview-header">
+                <span>Готов текст за изпращане до vzekoinfo@gmail.com</span>
+                <button type="button" class="mini-btn" id="copyBodyBtn">Копирай текста</button>
+              </div>
+              <pre id="generatedText"></pre>
+            </div>
+          </div>
+
+          <!-- Директен контакт -->
+          <aside class="contact-card">
+            <h3>Директен контакт</h3>
+            <p>Изпрати снимки, модел и описание на състоянието на нашия официален имейл адрес и ще се свържем с теб с конкретна оферта.</p>
+
+            <div class="email-box">
+              <div class="email-label">Официален имейл за оферти</div>
+              <a class="email-address" href="mailto:vzekoinfo@gmail.com?subject=%D0%97%D0%B0%D0%BF%D0%B8%D1%82%D0%B2%D0%B0%D0%BD%D0%B5%20%D0%B7%D0%B0%20%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%E2%80%93%20VZEKO">vzekoinfo@gmail.com</a>
+              <div class="email-btns">
+                <button type="button" class="btn" id="copyEmailBtn">КОПИРАЙ ИМЕЙЛА</button>
+                <a class="btn secondary" href="mailto:vzekoinfo@gmail.com?subject=%D0%97%D0%B0%D0%BF%D0%B8%D1%82%D0%B2%D0%B0%D0%BD%D0%B5%20%D0%B7%D0%B0%20%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%E2%80%93%20VZEKO">ОТВОРИ ПОЩА ↗</a>
+              </div>
+            </div>
+
+            <div class="info-list">
+              <div class="info-row">
+                <span class="info-dot">✓</span>
+                <span><strong>София:</strong> Удобно лично предаване след уточняване на офертата.</span>
+              </div>
+              <div class="info-row">
+                <span class="info-dot">✓</span>
+                <span><strong>Цяла България:</strong> Бърза работа с куриер чрез <strong>Еконт</strong> и <strong>Спиди</strong>.</span>
+              </div>
+              <div class="info-row">
+                <span class="info-dot">✓</span>
+                <span><strong>Без обвързване:</strong> Получаваш конкретна цена и решаваш спокойно.</span>
+              </div>
+            </div>
+
+            <div class="social-soon">
+              Официални страници:
+              <a href="https://www.instagram.com/vzeko.bg?fbclid=IwY2xjawVyXatleHRuA2FlbQIxMABwZG9mBWJyaWQRMHJ1MlpwSzhVTU84eVlEOHNzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfeQ5peVWhFsc4wRC_uLaNVDnJqZ6Pd6txQIKSPsjV8eVonrQ58UM6dNdPCAo_aem_3HBwroMLLLUCbHLJnPXrPw" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="font-size: 18px; margin-left: 6px; vertical-align: middle;">📸</a>
+              <a href="https://www.facebook.com/profile.php?id=61596673750111" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="font-size: 18px; margin-left: 6px; vertical-align: middle;">📘</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ФУТЪР -->
+  <footer>
+    <div class="wrap footer-inner">
+      <a class="brand-link" href="#home" aria-label="VZEKO начало">
+        <svg width="144" height="44" viewBox="0 0 340 102" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VZEKO">
+          <defs>
+            <linearGradient id="footGold" x1="15" y1="15" x2="320" y2="85" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFF0BD"/>
+              <stop offset="35%" stop-color="#E5C365"/>
+              <stop offset="75%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#9A762B"/>
+            </linearGradient>
+          </defs>
+          <path d="M54 55C108 14 218 6 286 19L283 8L318 24L276 34L282 25C216 14 112 22 54 55Z" fill="url(#footGold)"/>
+          <path d="M22 28H46L58 56L76 28H96L64 72H45L22 28Z" fill="url(#footGold)"/>
+          <text x="95" y="71" fill="url(#footGold)" font-family="Montserrat, Arial, sans-serif" font-weight="900" font-style="italic" font-size="53" letter-spacing="3">ZEKO</text>
+          <line x1="26" y1="88" x2="78" y2="88" stroke="url(#footGold)" stroke-width="2" stroke-linecap="round"/>
+          <text x="172" y="92" text-anchor="middle" fill="#E8CA74" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="12.5" letter-spacing="4.2">ПАРИ ВЕДНАГА.</text>
+          <line x1="266" y1="88" x2="314" y2="88" stroke="url(#footGold)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </a>
+
+      <div class="footer-center">
+        <div class="footer-tagline">ПАРИ ВЕДНАГА.</div>
+        <a class="footer-mail" href="mailto:vzekoinfo@gmail.com">vzekoinfo@gmail.com</a>
+        <div style="display: flex; gap: 14px; font-size: 18px; margin-top: 2px;">
+          <a class="footer-mail" href="https://www.instagram.com/vzeko.bg?fbclid=IwY2xjawVyXatleHRuA2FlbQIxMABwZG9mBWJyaWQRMHJ1MlpwSzhVTU84eVlEOHNzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfeQ5peVWhFsc4wRC_uLaNVDnJqZ6Pd6txQIKSPsjV8eVonrQ58UM6dNdPCAo_aem_3HBwroMLLLUCbHLJnPXrPw" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸</a>
+          <a class="footer-mail" href="https://www.facebook.com/profile.php?id=61596673750111" target="_blank" rel="noopener noreferrer" aria-label="Facebook">📘</a>
+        </div>
+      </div>
+
+      <div class="footer-copy">© <span id="year"></span> VZEKO. Всички права запазени.</div>
+    </div>
+  </footer>
+
+  <!-- Toast нотификация -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Мобилно меню
+    const menuBtn = document.getElementById('menuBtn');
+    const navlinks = document.getElementById('navlinks');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navlinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navlinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navlinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Текуща година във футъра
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Помощна функция за показване на известие (вместо alert)
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    // Надеждно копиране в клипборда (работи и в iFrame / мобилни браузъри)
+    function copyToClipboard(text, successMessage, buttonEl, originalLabel) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (err) {
+        copied = false;
+      }
+      document.body.removeChild(textarea);
+
+      if (copied) {
+        showToast(successMessage);
+        if (buttonEl && originalLabel) {
+          buttonEl.textContent = 'КОПИРАНО! ✓';
+          setTimeout(() => {
+            buttonEl.textContent = originalLabel;
+          }, 2200);
+        }
+      } else {
+        showToast('Маркирайте и копирайте текста ръчно.');
+      }
+    }
+
+    // Бутон за копиране на имейл адреса
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    copyEmailBtn.addEventListener('click', () => {
+      copyToClipboard(
+        'vzekoinfo@gmail.com',
+        'Имейлът vzekoinfo@gmail.com е копиран!',
+        copyEmailBtn,
+        'КОПИРАЙ ИМЕЙЛА'
+      );
+    });
+
+    // Генератор на запитване за оферта
+    const offerForm = document.getElementById('offerForm');
+    const generateTextBtn = document.getElementById('generateTextBtn');
+    const previewBox = document.getElementById('previewBox');
+    const generatedTextEl = document.getElementById('generatedText');
+    const copyBodyBtn = document.getElementById('copyBodyBtn');
+
+    function buildInquiryPayload() {
+      const category = document.getElementById('category').value.trim();
+      const city = document.getElementById('city').value.trim() || 'Не е посочено';
+      const itemModel = document.getElementById('itemModel').value.trim();
+      const condition = document.getElementById('condition').value.trim();
+      const targetPrice = document.getElementById('targetPrice').value.trim() || 'Очаквам вашата оферта';
+
+      const subject = `Запитване за оферта: ${itemModel || category} – VZEKO`;
+      const body = [
+        'Здравейте, VZEKO!',
+        'Бих искал да получа оферта за следната вещ:',
+        '',
+        `• Категория: ${category}`,
+        `• Марка и модел: ${itemModel || '(попълни модел)'}`,
+        `• Състояние и комплектовка: ${condition || '(опиши състоянието)'}`,
+        `• Ориентировъчна цена: ${targetPrice}`,
+        `• Населено място: ${city}`,
+        '',
+        'Прикачвам снимки на вещта към това писмо.'
+      ].join('\n');
+
+      return { subject, body, itemModel, condition };
+    }
+
+    function showGeneratedPreview() {
+      const { body } = buildInquiryPayload();
+      generatedTextEl.textContent = body;
+      previewBox.classList.add('visible');
+    }
+
+    generateTextBtn.addEventListener('click', () => {
+      showGeneratedPreview();
+      showToast('Текстът е подготвен — можеш да го копираш с 1 клик.');
+    });
+
+    copyBodyBtn.addEventListener('click', () => {
+      copyToClipboard(
+        generatedTextEl.textContent,
+        'Текстът на запитването е копиран!',
+        copyBodyBtn,
+        'Копирай текста'
+      );
+    });
+
+    offerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const { subject, body, itemModel, condition } = buildInquiryPayload();
+
+      if (!itemModel || !condition) {
+        showToast('Моля, попълнете марка/модел и състояние на вещта.');
+        if (!itemModel) {
+          document.getElementById('itemModel').focus();
+        } else {
+          document.getElementById('condition').focus();
+        }
+        return;
+      }
+
+      // Показваме и резервния текст за уеб поща
+      showGeneratedPreview();
+
+      const mailtoUrl = `mailto:vzekoinfo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+      showToast('Отваряне на имейл клиент към vzekoinfo@gmail.com...');
+    });
+  </script>
+</body>
+</html>
