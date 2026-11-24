@@ -933,12 +933,12 @@
         <div class="section-head">
           <div class="kicker">Запитване за оферта</div>
           <h2>Имаш нещо за продаване? <span class="gold-text">Ние имаме оферта.</span></h2>
-          <p>Попълни данните за вещта по-долу и изпрати заявката си. След получаване на заявката човек от екипа ще се свърже с вас.</p>
+          <p>Попълни данните за вещта по-долу и изпрати заявката си. След получаване на заявката ще се свържем с вас.</p>
         </div>
         <div class="offer-grid">
           <div class="form-card">
             <h3>Изпрати запитване за оферта</h3>
-            <p class="form-sub">Попълни данните за вещта — след получаване на заявката човек от екипа ще се свърже с вас.</p>
+            <p class="form-sub">Попълни данните за вещта — след получаване на заявката ще се свържем с вас.</p>
             <form id="offerForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
               <input type="hidden" name="access_key" value="7cacff18-e0b8-47f5-b993-1f10681a47df">
               <input type="hidden" name="subject" id="hiddenSubject" value="Ново запитване за оферта – VZEKO">
@@ -947,7 +947,7 @@
               <div class="form-row">
                 <div class="field" style="margin-bottom:0">
                   <label for="category">Категория вещ</label>
-                  <select id="category" name="Категория">
+                  <select id="category" name="Category">
                     <option value="Телефон / Таблет">Телефон / Таблет</option>
                     <option value="Лаптоп / Компютър">Лаптоп / Компютър</option>
                     <option value="Конзола / Гейминг">Конзола / Гейминг</option>
@@ -958,25 +958,25 @@
                 </div>
                 <div class="field" style="margin-bottom:0">
                   <label for="city">Населено място</label>
-                  <input type="text" id="city" name="Населено_място" placeholder="Напр. София, Пловдив, Варна...">
+                  <input type="text" id="city" name="City" placeholder="Напр. София, Пловдив, Варна...">
                 </div>
               </div>
               <div class="field">
                 <label for="itemModel">Марка и точен модел *</label>
-                <input type="text" id="itemModel" name="Марка_и_модел" placeholder="Напр. iPhone 15 Pro 256GB / PlayStation 5 / Bosch GSR..." required>
+                <input type="text" id="itemModel" name="Model" placeholder="Напр. iPhone 15 Pro 256GB / PlayStation 5 / Bosch GSR..." required>
               </div>
               <div class="field">
                 <label for="condition">Състояние (подробно описание) *</label>
-                <textarea id="condition" name="Състояние_и_описание" placeholder="Опиши подробно състоянието (работи ли без забележки, следи от употреба) и какво включва (кутия, зарядно, документи, аксесоари)..." required></textarea>
+                <textarea id="condition" name="Condition_and_details" placeholder="Опиши подробно състоянието (работи ли без забележки, следи от употреба) и какво включва (кутия, зарядно, документи, аксесоари)..." required></textarea>
               </div>
               <div class="form-row">
                 <div class="field" style="margin-bottom:0">
                   <label for="targetPrice">Ориентировъчна цена в € (по желание)</label>
-                  <input type="text" id="targetPrice" name="Ориентировъчна_цена" placeholder="Напр. 350 € (може да оставиш празно)">
+                  <input type="text" id="targetPrice" name="Expected_price_EUR" placeholder="Напр. 350 € (може да оставиш празно)">
                 </div>
                 <div class="field" style="margin-bottom:0">
                   <label for="senderPhone">Телефонен номер *</label>
-                  <input type="tel" id="senderPhone" name="Телефон" placeholder="Напр. 088 123 4567" required>
+                  <input type="tel" id="senderPhone" name="Phone" placeholder="Напр. 088 123 4567" required>
                 </div>
               </div>
               <div class="field" style="margin-top:16px">
@@ -985,7 +985,7 @@
               </div>
               <div class="photo-hint">
                 <span style="font-size:16px">✓</span>
-                <span>След получаване на заявката човек от екипа ще се свърже с вас.</span>
+                <span>След получаване на заявката ще се свържем с вас.</span>
               </div>
               <div class="form-actions">
                 <button type="submit" class="btn" id="submitOfferBtn">ИЗПРАТИ ЗАПИТВАНЕ <span>↗</span></button>
@@ -1003,7 +1003,7 @@
           </div>
           <aside class="contact-card">
             <h3>Директен контакт</h3>
-            <p>Попълни формата или се свържи с нас — след получаване на заявката човек от екипа ще се свърже с вас.</p>
+            <p>Попълни формата или се свържи с нас — след получаване на заявката ще се свържем с вас.</p>
             <div class="email-box">
               <div class="email-label">Официален имейл за оферти</div>
               <a class="email-address" href="mailto:vzekoinfo@gmail.com?subject=%D0%97%D0%B0%D0%BF%D0%B8%D1%82%D0%B2%D0%B0%D0%BD%D0%B5%20%D0%B7%D0%B0%20%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%E2%80%93%20VZEKO">vzekoinfo@gmail.com</a>
@@ -1210,7 +1210,7 @@
         const result = await response.json();
         if (response.ok && result.success) {
           submitStatus.className = 'submit-status success';
-          submitStatus.innerHTML = '<strong>✓ Запитването е изпратено успешно!</strong> След получаване на заявката човек от екипа ще се свърже с вас.';
+          submitStatus.innerHTML = '<strong>✓ Запитването е изпратено успешно!</strong> След получаване на заявката ще се свържем с вас.';
           showToast('Запитването е изпратено успешно!');
           offerForm.reset();
         } else {
