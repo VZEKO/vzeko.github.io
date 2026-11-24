@@ -850,6 +850,162 @@
       margin-bottom: 20px;
     }
 
+    /* Квадратчета за качване на снимки */
+    .photo-slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .photo-slot {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      border: 1.5px dashed rgba(212, 175, 55, 0.42);
+      background: #090909;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    }
+
+    .photo-slot:hover {
+      border-color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .photo-slot input[type="file"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .photo-slot-plus {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold-light);
+    }
+
+    .photo-slot-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .photo-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .photo-remove {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      z-index: 3;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(6, 6, 6, 0.85);
+      color: #fff;
+      font-size: 13px;
+      line-height: 1;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .photo-slot.has-file .photo-remove {
+      display: inline-flex;
+    }
+
+    /* Иконки за социални мрежи */
+    .social-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 10px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      color: var(--gold-light);
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .social-icon-btn:hover {
+      background: rgba(212, 175, 55, 0.18);
+      border-color: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .social-icon-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      color: var(--gold-light);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .social-icon-circle:hover {
+      background: rgba(212, 175, 55, 0.18);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* Състояние след изпращане на формата */
+    .submit-status {
+      display: none;
+      margin-top: 16px;
+      padding: 15px 16px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .submit-status.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.42);
+      color: #BBF7D0;
+    }
+
+    .submit-status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.42);
+      color: #FECACA;
+    }
+
     .form-actions {
       display: flex;
       gap: 12px;
@@ -1160,6 +1316,10 @@
       .form-row,
       .emblem-metrics {
         grid-template-columns: 1fr;
+      }
+
+      .photo-slots {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .ticker-inner {
@@ -1523,14 +1683,20 @@
         <div class="offer-grid">
           <!-- Бърз генератор на запитване -->
           <div class="form-card">
-            <h3>Бърз генератор на запитване</h3>
-            <p class="form-sub">Подреди информацията за 30 секунди и изпрати директно по имейл.</p>
+            <h3>Изпрати запитване за оферта</h3>
+            <p class="form-sub">Попълни данните за вещта, прикачи снимки и въведи своя имейл — получаваме запитването директно на пощата си.</p>
 
-            <form id="offerForm" novalidate>
+            <form id="offerForm" action="https://formsubmit.co/vzekoinfo@gmail.com" method="POST" enctype="multipart/form-data" novalidate>
+              <!-- Настройки за директно получаване на имейл с прикачени снимки -->
+              <input type="hidden" name="_subject" id="hiddenSubject" value="Ново запитване за оферта – VZEKO">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
               <div class="form-row">
                 <div class="field" style="margin-bottom:0">
                   <label for="category">Категория вещ</label>
-                  <select id="category" name="category">
+                  <select id="category" name="Категория">
                     <option value="Телефон / Таблет">Телефон / Таблет</option>
                     <option value="Лаптоп / Компютър">Лаптоп / Компютър</option>
                     <option value="Конзола / Гейминг">Конзола / Гейминг</option>
@@ -1542,34 +1708,80 @@
 
                 <div class="field" style="margin-bottom:0">
                   <label for="city">Населено място</label>
-                  <input type="text" id="city" name="city" placeholder="Напр. София, Пловдив, Варна...">
+                  <input type="text" id="city" name="Населено_място" placeholder="Напр. София, Пловдив, Варна...">
                 </div>
               </div>
 
               <div class="field">
                 <label for="itemModel">Марка и точен модел *</label>
-                <input type="text" id="itemModel" name="itemModel" placeholder="Напр. iPhone 15 Pro 256GB / PlayStation 5 / Bosch GSR..." required>
+                <input type="text" id="itemModel" name="Марка_и_модел" placeholder="Напр. iPhone 15 Pro 256GB / PlayStation 5 / Bosch GSR..." required>
               </div>
 
               <div class="field">
-                <label for="condition">Състояние и комплектовка *</label>
-                <textarea id="condition" name="condition" placeholder="Опиши състоянието (работи ли без забележки, следи от употреба) и какво включва (кутия, зарядно, документи, аксесоари)..." required></textarea>
+                <label for="condition">Състояние (подробно описание) *</label>
+                <textarea id="condition" name="Състояние_и_описание" placeholder="Опиши подробно състоянието (работи ли без забележки, следи от употреба) и какво включва (кутия, зарядно, документи, аксесоари)..." required></textarea>
               </div>
 
-              <div class="field">
-                <label for="targetPrice">Ориентировъчна търсена цена в € (по желание)</label>
-                <input type="text" id="targetPrice" name="targetPrice" placeholder="Напр. 350 € (може да оставиш празно за наша оценка)">
+              <div class="form-row">
+                <div class="field" style="margin-bottom:0">
+                  <label for="targetPrice">Ориентировъчна цена в € (по желание)</label>
+                  <input type="text" id="targetPrice" name="Ориентировъчна_цена" placeholder="Напр. 350 € (може да оставиш празно)">
+                </div>
+
+                <div class="field" style="margin-bottom:0">
+                  <label for="senderEmail">Твоят имейл за отговор *</label>
+                  <input type="email" id="senderEmail" name="email" placeholder="name@example.com" required>
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:16px">
+                <label>Качи снимки на вещта (до 4 снимки)</label>
+                <div class="photo-slots" id="photoSlots">
+                  <div class="photo-slot" data-slot="0">
+                    <input type="file" name="Снимка_1" accept="image/*" aria-label="Качи снимка 1">
+                    <img alt="Преглед снимка 1" style="display:none">
+                    <button type="button" class="photo-remove" aria-label="Премахни снимка 1">×</button>
+                    <span class="photo-slot-plus">+</span>
+                    <span class="photo-slot-label">Снимка 1</span>
+                  </div>
+
+                  <div class="photo-slot" data-slot="1">
+                    <input type="file" name="Снимка_2" accept="image/*" aria-label="Качи снимка 2">
+                    <img alt="Преглед снимка 2" style="display:none">
+                    <button type="button" class="photo-remove" aria-label="Премахни снимка 2">×</button>
+                    <span class="photo-slot-plus">+</span>
+                    <span class="photo-slot-label">Снимка 2</span>
+                  </div>
+
+                  <div class="photo-slot" data-slot="2">
+                    <input type="file" name="Снимка_3" accept="image/*" aria-label="Качи снимка 3">
+                    <img alt="Преглед снимка 3" style="display:none">
+                    <button type="button" class="photo-remove" aria-label="Премахни снимка 3">×</button>
+                    <span class="photo-slot-plus">+</span>
+                    <span class="photo-slot-label">Снимка 3</span>
+                  </div>
+
+                  <div class="photo-slot" data-slot="3">
+                    <input type="file" name="Снимка_4" accept="image/*" aria-label="Качи снимка 4">
+                    <img alt="Преглед снимка 4" style="display:none">
+                    <button type="button" class="photo-remove" aria-label="Премахни снимка 4">×</button>
+                    <span class="photo-slot-plus">+</span>
+                    <span class="photo-slot-label">Снимка 4</span>
+                  </div>
+                </div>
               </div>
 
               <div class="photo-hint">
                 <span style="font-size:16px">📸</span>
-                <span><strong>Важно:</strong> След като натиснеш бутона, прикачи 2–4 ясни снимки на вещта в имейла, за да получиш максимално точна и бърза оферта.</span>
+                <span><strong>Съвет:</strong> Добави 2–4 ясни снимки от различни ъгли и въведи своя имейл, за да ти върнем точна оферта възможно най-бързо.</span>
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="btn">ИЗПРАТИ ЗАПИТВАНЕ ПО ИМЕЙЛ <span>↗</span></button>
+                <button type="submit" class="btn" id="submitOfferBtn">ИЗПРАТИ ЗАПИТВАНЕ <span>↗</span></button>
                 <button type="button" class="btn secondary" id="generateTextBtn">ПОДГОТВИ ТЕКСТ ЗА КОПИРАНЕ</button>
               </div>
+
+              <div class="submit-status" id="submitStatus" role="status" aria-live="polite"></div>
             </form>
 
             <!-- Готов текст за уеб поща (Gmail в браузър) -->
@@ -1612,9 +1824,23 @@
             </div>
 
             <div class="social-soon">
-              Официални страници:
-              <a href="https://www.instagram.com/vzeko.bg?fbclid=IwY2xjawVyXatleHRuA2FlbQIxMABwZG9mBWJyaWQRMHJ1MlpwSzhVTU84eVlEOHNzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfeQ5peVWhFsc4wRC_uLaNVDnJqZ6Pd6txQIKSPsjV8eVonrQ58UM6dNdPCAo_aem_3HBwroMLLLUCbHLJnPXrPw" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="font-size: 18px; margin-left: 6px; vertical-align: middle;">📸</a>
-              <a href="https://www.facebook.com/profile.php?id=61596673750111" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="font-size: 18px; margin-left: 6px; vertical-align: middle;">📘</a>
+              <div style="margin-bottom: 10px; font-weight: 600; color: #DCD7CD;">Официални страници:</div>
+              <div class="social-row">
+                <a class="social-icon-btn" href="https://www.instagram.com/vzeko.bg?fbclid=IwY2xjawVyXatleHRuA2FlbQIxMABwZG9mBWJyaWQRMHJ1MlpwSzhVTU84eVlEOHNzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfeQ5peVWhFsc4wRC_uLaNVDnJqZ6Pd6txQIKSPsjV8eVonrQ58UM6dNdPCAo_aem_3HBwroMLLLUCbHLJnPXrPw" target="_blank" rel="noopener noreferrer" aria-label="Instagram VZEKO">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+                <a class="social-icon-btn" href="https://www.facebook.com/profile.php?id=61596673750111" target="_blank" rel="noopener noreferrer" aria-label="Facebook VZEKO">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5Z"/>
+                  </svg>
+                  <span>Facebook</span>
+                </a>
+              </div>
             </div>
           </aside>
         </div>
@@ -1647,9 +1873,19 @@
       <div class="footer-center">
         <div class="footer-tagline">ПАРИ ВЕДНАГА.</div>
         <a class="footer-mail" href="mailto:vzekoinfo@gmail.com">vzekoinfo@gmail.com</a>
-        <div style="display: flex; gap: 14px; font-size: 18px; margin-top: 2px;">
-          <a class="footer-mail" href="https://www.instagram.com/vzeko.bg?fbclid=IwY2xjawVyXatleHRuA2FlbQIxMABwZG9mBWJyaWQRMHJ1MlpwSzhVTU84eVlEOHNzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfeQ5peVWhFsc4wRC_uLaNVDnJqZ6Pd6txQIKSPsjV8eVonrQ58UM6dNdPCAo_aem_3HBwroMLLLUCbHLJnPXrPw" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸</a>
-          <a class="footer-mail" href="https://www.facebook.com/profile.php?id=61596673750111" target="_blank" rel="noopener noreferrer" aria-label="Facebook">📘</a>
+        <div style="display: flex; gap: 10px; margin-top: 4px;">
+          <a class="social-icon-circle" href="https://www.instagram.com/vzeko.bg?fbclid=IwY2xjawVyXatleHRuA2FlbQIxMABwZG9mBWJyaWQRMHJ1MlpwSzhVTU84eVlEOHNzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEfeQ5peVWhFsc4wRC_uLaNVDnJqZ6Pd6txQIKSPsjV8eVonrQ58UM6dNdPCAo_aem_3HBwroMLLLUCbHLJnPXrPw" target="_blank" rel="noopener noreferrer" aria-label="Instagram VZEKO" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a class="social-icon-circle" href="https://www.facebook.com/profile.php?id=61596673750111" target="_blank" rel="noopener noreferrer" aria-label="Facebook VZEKO" title="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5Z"/>
+            </svg>
+          </a>
         </div>
       </div>
 
@@ -1741,6 +1977,49 @@
     const previewBox = document.getElementById('previewBox');
     const generatedTextEl = document.getElementById('generatedText');
     const copyBodyBtn = document.getElementById('copyBodyBtn');
+    const submitOfferBtn = document.getElementById('submitOfferBtn');
+    const submitStatus = document.getElementById('submitStatus');
+    const hiddenSubject = document.getElementById('hiddenSubject');
+
+    // Управление на 4-те квадратчета за качване на снимки с предварителен преглед
+    document.querySelectorAll('.photo-slot').forEach(slot => {
+      const fileInput = slot.querySelector('input[type="file"]');
+      const previewImg = slot.querySelector('img');
+      const removeBtn = slot.querySelector('.photo-remove');
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) {
+          slot.classList.remove('has-file');
+          previewImg.style.display = 'none';
+          previewImg.removeAttribute('src');
+          return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+          showToast('Моля, изберете валиден файл със снимка.');
+          fileInput.value = '';
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          previewImg.src = ev.target.result;
+          previewImg.style.display = 'block';
+          slot.classList.add('has-file');
+        };
+        reader.readAsDataURL(file);
+      });
+
+      removeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileInput.value = '';
+        previewImg.style.display = 'none';
+        previewImg.removeAttribute('src');
+        slot.classList.remove('has-file');
+      });
+    });
 
     function buildInquiryPayload() {
       const category = document.getElementById('category').value.trim();
@@ -1748,6 +2027,7 @@
       const itemModel = document.getElementById('itemModel').value.trim();
       const condition = document.getElementById('condition').value.trim();
       const targetPrice = document.getElementById('targetPrice').value.trim() || 'Очаквам вашата оферта';
+      const senderEmail = document.getElementById('senderEmail').value.trim();
 
       const subject = `Запитване за оферта: ${itemModel || category} – VZEKO`;
       const body = [
@@ -1756,14 +2036,15 @@
         '',
         `• Категория: ${category}`,
         `• Марка и модел: ${itemModel || '(попълни модел)'}`,
-        `• Състояние и комплектовка: ${condition || '(опиши състоянието)'}`,
+        `• Състояние (подробно описание): ${condition || '(опиши състоянието)'}`,
         `• Ориентировъчна цена: ${targetPrice}`,
         `• Населено място: ${city}`,
+        `• Имейл за връзка: ${senderEmail || '(въведи имейл)'}`,
         '',
-        'Прикачвам снимки на вещта към това писмо.'
+        'Прикачвам снимки на вещта към това запитване.'
       ].join('\n');
 
-      return { subject, body, itemModel, condition };
+      return { subject, body, itemModel, condition, senderEmail };
     }
 
     function showGeneratedPreview() {
@@ -1786,12 +2067,15 @@
       );
     });
 
-    offerForm.addEventListener('submit', (e) => {
+    offerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const { subject, body, itemModel, condition } = buildInquiryPayload();
+      submitStatus.className = 'submit-status';
+      submitStatus.textContent = '';
+
+      const { subject, itemModel, condition, senderEmail } = buildInquiryPayload();
 
       if (!itemModel || !condition) {
-        showToast('Моля, попълнете марка/модел и състояние на вещта.');
+        showToast('Моля, попълнете марка/модел и подробно описание на състоянието.');
         if (!itemModel) {
           document.getElementById('itemModel').focus();
         } else {
@@ -1800,12 +2084,61 @@
         return;
       }
 
-      // Показваме и резервния текст за уеб поща
-      showGeneratedPreview();
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(senderEmail);
+      if (!senderEmail || !emailValid) {
+        showToast('Моля, въведете валиден имейл адрес, на който да ви отговорим.');
+        document.getElementById('senderEmail').focus();
+        return;
+      }
 
-      const mailtoUrl = `mailto:vzekoinfo@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoUrl;
-      showToast('Отваряне на имейл клиент към vzekoinfo@gmail.com...');
+      hiddenSubject.value = subject;
+      const originalBtnHtml = submitOfferBtn.innerHTML;
+      submitOfferBtn.disabled = true;
+      submitOfferBtn.textContent = 'ИЗПРАЩАНЕ...';
+
+      try {
+        const formData = new FormData(offerForm);
+        // Премахваме празните полета за снимки, за да не се изпращат празни файлове
+        ['Снимка_1', 'Снимка_2', 'Снимка_3', 'Снимка_4'].forEach(fieldName => {
+          const fileVal = formData.get(fieldName);
+          if (fileVal instanceof File && fileVal.size === 0) {
+            formData.delete(fieldName);
+          }
+        });
+
+        const response = await fetch('https://formsubmit.co/ajax/vzekoinfo@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok && (result.success === 'true' || result.success === true)) {
+          submitStatus.className = 'submit-status success';
+          submitStatus.innerHTML = '<strong>✓ Запитването е изпратено успешно!</strong> Получихме описанието и снимките ви и ще ви отговорим на <strong>' + senderEmail + '</strong>.';
+          showToast('Запитването е изпратено успешно до VZEKO!');
+          offerForm.reset();
+          document.querySelectorAll('.photo-slot').forEach(slot => {
+            const img = slot.querySelector('img');
+            img.style.display = 'none';
+            img.removeAttribute('src');
+            slot.classList.remove('has-file');
+          });
+        } else {
+          throw new Error(result.message || 'Възникна проблем при изпращането.');
+        }
+      } catch (err) {
+        showGeneratedPreview();
+        submitStatus.className = 'submit-status error';
+        submitStatus.innerHTML = 'Не успяхме да изпратим формата автоматично в момента. Можете да използвате готовия текст отдолу или да ни пишете директно на <strong>vzekoinfo@gmail.com</strong>.';
+        showToast('Моля, опитайте отново или изпратете на vzekoinfo@gmail.com.');
+      } finally {
+        submitOfferBtn.disabled = false;
+        submitOfferBtn.innerHTML = originalBtnHtml;
+      }
     });
   </script>
 </body>
